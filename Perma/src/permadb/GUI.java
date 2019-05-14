@@ -6,6 +6,7 @@
 package permadb;
 
 import javax.swing.JFileChooser;
+import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -15,11 +16,15 @@ import java.util.ArrayList;
  */
 public class GUI extends javax.swing.JFrame {
 
-    /**
+    Connection SQL;
+    boolean first = true; // ugh, figure a way aroud this global
+    
+    /*
      * Creates new form GUI
      */
     public GUI() {
         initComponents();
+        initLists();
     }
 
     /**
@@ -36,19 +41,23 @@ public class GUI extends javax.swing.JFrame {
         dbBrowseBTN = new javax.swing.JButton();
         openBTN = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        resultList = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        zone2BTN = new javax.swing.JCheckBox();
-        zone3BTN = new javax.swing.JCheckBox();
-        zone4BTN = new javax.swing.JCheckBox();
-        zone5BTN = new javax.swing.JCheckBox();
-        zone7BTN = new javax.swing.JCheckBox();
-        zone8BTN = new javax.swing.JCheckBox();
-        zone6BTN = new javax.swing.JCheckBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        zoneList = new javax.swing.JList<>();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        lightList = new javax.swing.JList<>();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        moistureList = new javax.swing.JList<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        habitatList = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,26 +78,39 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        resultList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(resultList);
 
-        zone2BTN.setText("Zone 2");
+        zoneList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                zoneListValueChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(zoneList);
 
-        zone3BTN.setText("Zone 3");
+        lightList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lightListValueChanged(evt);
+            }
+        });
+        jScrollPane6.setViewportView(lightList);
 
-        zone4BTN.setText("Zone 4");
+        moistureList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                moistureListValueChanged(evt);
+            }
+        });
+        jScrollPane7.setViewportView(moistureList);
 
-        zone5BTN.setText("Zone 5");
+        jLabel5.setText("Zone");
 
-        zone7BTN.setText("Zone 7");
+        jLabel6.setText("Light");
 
-        zone8BTN.setText("Zone 8");
-
-        zone6BTN.setText("Zone 6");
+        jLabel7.setText("Moisture");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -97,81 +119,86 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(zone2BTN)
-                    .addComponent(zone3BTN)
-                    .addComponent(zone4BTN)
-                    .addComponent(zone5BTN)
-                    .addComponent(zone6BTN)
-                    .addComponent(zone7BTN)
-                    .addComponent(zone8BTN))
-                .addContainerGap(279, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(zone2BTN)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zone3BTN)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zone4BTN)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zone5BTN)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zone6BTN)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zone7BTN)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zone8BTN)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Hardiness Zone", jPanel2);
+        jTabbedPane1.addTab("Zone, Light, Moisture", jPanel2);
+
+        habitatList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                habitatListValueChanged(evt);
+            }
+        });
+        jScrollPane3.setViewportView(habitatList);
+
+        jLabel2.setText("Habitat");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 351, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(473, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Light and Moisture", jPanel3);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 351, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("tab3", jPanel4);
+        jTabbedPane1.addTab("Habitat, Region", jPanel3);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 351, Short.MAX_VALUE)
+            .addGap(0, 581, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
+            .addGap(0, 257, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab4", jPanel5);
+        jTabbedPane1.addTab("more more params", jPanel5);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,55 +258,143 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_dbBrowseBTNActionPerformed
 
     private void openBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openBTNActionPerformed
-        // TODO add your handling code here:
+        try {
+            SQL = openConnection(dbText.getText());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_openBTNActionPerformed
 
-    String getParams() {
-        String finalQuery = "";
-        ArrayList<String> queryCompiler = new ArrayList<>();
-        if (!getParams_zone().equals("")) {
-            queryCompiler.add(getParams_zone());
+    private void habitatListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_habitatListValueChanged
+        if (evt.getValueIsAdjusting()) {
+            try {
+                updateResults();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
+    }//GEN-LAST:event_habitatListValueChanged
 
-        return finalQuery;
+    private void moistureListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_moistureListValueChanged
+        if (evt.getValueIsAdjusting()) {
+            try {
+                updateResults();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_moistureListValueChanged
+
+    private void lightListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lightListValueChanged
+        if (evt.getValueIsAdjusting()) {
+            try {
+                updateResults();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_lightListValueChanged
+
+    private void zoneListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_zoneListValueChanged
+        if (evt.getValueIsAdjusting()) {
+            try {
+                updateResults();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_zoneListValueChanged
+
+    void initLists() {
+        zoneList.setListData(new String[]{"Zone 2", "Zone 3", "Zone 4", "Zone 5", "Zone 6", "Zone 7", "Zone 8"});
+        lightList.setListData(new String[]{"Full Sun", "Partial Shade", "Shade"});
+        moistureList.setListData(new String[]{"Xeric", "Mesic", "Hydric"});
+        habitatList.setListData(new String[]{"Prairies", "Gaps/Clearings", "Open Woods", "Forest", "Disturbed", "Meadows", "Old Fields", "Edges", "Conifer Forest", "Thickets"});
     }
 
-    String getParams_zone() {
-        ArrayList<String> params = new ArrayList<String>();
-        StringBuilder zoneParams = new StringBuilder("");
-        if (zone2BTN.isSelected()) {
-            params.add("plantzones.zone = '2'");
-        };
-        if (zone3BTN.isSelected()) {
-            params.add("plantzones.zone = '3'");
-        };
-        if (zone4BTN.isSelected()) {
-            params.add("plantzones.zone = '4'");
-        };
-        if (zone5BTN.isSelected()) {
-            params.add("plantzones.zone = '5'");
-        };
-        if (zone6BTN.isSelected()) {
-            params.add("plantzones.zone = '6'");
-        };
-        if (zone7BTN.isSelected()) {
-            params.add("plantzones.zone = '7'");
-        };
-        if (zone8BTN.isSelected()) {
-            params.add("plantzones.zone = '8'");
-        };
-        if (params.size() > 0) {
-            zoneParams.append("(");
-
-            for (int i = 0; i < params.size(); i++) {
-                if (i > 0) {
-                    zoneParams.append(" OR ");
-                }
-                zoneParams.append(params.get(i));
-            }
-            zoneParams.append(")");
+    void updateResults() throws SQLException {
+        List<String> output = new ArrayList<>();
+        String query = getParams();
+        PreparedStatement SQLquery = SQL.prepareStatement(query);
+        ResultSet results = SQLquery.executeQuery();
+        while (results.next()) {
+            output.add(results.getString("genus") + " " + results.getString("species"));
         }
-        return zoneParams.toString();
+        String[] listData = new String[]{};
+        listData = output.toArray(listData);
+        resultList.setListData(listData);
+
+    }
+
+    StringBuilder appendParams(StringBuilder input, String[] inputArray) {
+        for (String value : inputArray) {
+            if (first) {
+                input.append(" WHERE ").append(value);
+                first = false;
+            } else {
+                input.append(" AND ").append(value);
+            }
+        }
+        return input;
+    }
+
+    String getParams() {
+        first = true; // reset global, determines where/or in query
+        String nameType = "genus, species ";
+        StringBuilder query = new StringBuilder("Select distinct " + nameType + " from plants"
+                + " inner join plantzones on plants.plantid = plantzones.plantid "
+                + " inner join light on plants.plantid = light.plantid "
+                + " inner join moisture on plants.plantid = moisture.plantid"
+                + " inner join habitat on plants.plantid = habitat.plantid");
+
+        query = appendParams(query, getZoneParams());
+        query = appendParams(query, getLightParams());
+        query = appendParams(query, getMoistureParams());
+        query = appendParams(query, getHabitatParams());
+
+        query.append(" order by plants.plantid");
+        System.out.println(query.toString());
+        return query.toString();
+    }
+
+    String[] getMoistureParams() {
+        String[] moisture = {"Xeric", "Mesic", "Hydric"};
+        int[] moistureIndex = moistureList.getSelectedIndices();
+        String[] output = new String[moistureIndex.length];
+        for (int i = 0; i < moistureIndex.length; i++) {
+            output[i] = "moisture.moistureType = '" + moisture[moistureIndex[i]] + "'";
+        }
+        return output;
+    }
+
+    String[] getZoneParams() {
+        int[] zones = {2, 3, 4, 5, 6, 7, 8};
+        int[] zoneIndex = zoneList.getSelectedIndices();
+        String[] output = new String[zoneIndex.length];
+        for (int i = 0; i < zoneIndex.length; i++) {
+            output[i] = "plantzones.zone = " + zones[zoneIndex[i]];
+        }
+        return output;
+    }
+
+    String[] getLightParams() {
+        String[] light = {"F", "P", "S"};
+        int[] lightIndex = lightList.getSelectedIndices();
+        String[] output = new String[lightIndex.length];
+        for (int i = 0; i < lightIndex.length; i++) {
+            output[i] = "light.lightType = '" + light[lightIndex[i]] + "'";
+        }
+        return output;
+    }
+
+    String[] getHabitatParams() {
+        String[] habitat = {"Prairies", "Gaps/Clearings", "Open Woods", "Forest", "Disturbed", "Meadows", "Old Fields", "Edges", "Conifer Forest", "Thickets"};
+        int[] habitatIndex = habitatList.getSelectedIndices();
+        String[] output = new String[habitatIndex.length];
+        for (int i = 0; i < habitatIndex.length; i++) {
+            output[i] = "habitat.habitat = '" + habitat[habitatIndex[i]] + "'";
+        }
+        return output;
     }
 
     /**
@@ -317,25 +432,34 @@ public class GUI extends javax.swing.JFrame {
         });
     }
 
+    Connection openConnection(String database) throws SQLException {
+        String url = "jdbc:sqlite:" + database;
+        return DriverManager.getConnection(url);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton dbBrowseBTN;
     private javax.swing.JTextField dbText;
+    private javax.swing.JList<String> habitatList;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JList<String> lightList;
+    private javax.swing.JList<String> moistureList;
     private javax.swing.JButton openBTN;
-    private javax.swing.JCheckBox zone2BTN;
-    private javax.swing.JCheckBox zone3BTN;
-    private javax.swing.JCheckBox zone4BTN;
-    private javax.swing.JCheckBox zone5BTN;
-    private javax.swing.JCheckBox zone6BTN;
-    private javax.swing.JCheckBox zone7BTN;
-    private javax.swing.JCheckBox zone8BTN;
+    private javax.swing.JList<String> resultList;
+    private javax.swing.JList<String> zoneList;
     // End of variables declaration//GEN-END:variables
 }
