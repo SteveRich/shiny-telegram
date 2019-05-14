@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class PermaDB extends generalUtils {
+public class PermaDBpopulate extends generalUtils {
 
     String[] tables = {"plantZones", "plantNames", "light",
         "moisture", "soilph", "habit", "form", "rootpattern",
@@ -28,7 +28,7 @@ public class PermaDB extends generalUtils {
 
     Connection SQL;
 
-    public PermaDB(String database) {
+    public PermaDBpopulate(String database) {
         this.database = database;
         try {
             SQL = openConnection(database);

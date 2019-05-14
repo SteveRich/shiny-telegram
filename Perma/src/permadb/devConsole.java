@@ -11,13 +11,13 @@ package permadb;
  */
 import javax.swing.JFileChooser;
 import java.sql.SQLException;
-import permadb.PermaDB;
+import permadb.PermaDBpopulate;
 
-public class PermaDBGUI extends javax.swing.JFrame {
+public class devConsole extends javax.swing.JFrame {
 
-    PermaDB creator;
+    PermaDBpopulate creator;
 
-    public PermaDBGUI() {
+    public devConsole() {
         initComponents();
     }
 
@@ -441,7 +441,7 @@ public class PermaDBGUI extends javax.swing.JFrame {
 
     private void dbInitOpenBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbInitOpenBTNActionPerformed
         if (!(dbInitText.getText().equals(""))) {
-            creator = new PermaDB(dbInitText.getText());
+            creator = new PermaDBpopulate(dbInitText.getText());
         } else {
             System.out.println("DB Field is blank");
         }
@@ -609,21 +609,27 @@ public class PermaDBGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PermaDBGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(devConsole.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PermaDBGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(devConsole.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PermaDBGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(devConsole.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PermaDBGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(devConsole.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PermaDBGUI().setVisible(true);
+                new devConsole().setVisible(true);
             }
         });
     }
