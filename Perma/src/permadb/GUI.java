@@ -6,6 +6,8 @@
 package permadb;
 
 import javax.swing.JFileChooser;
+import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -33,6 +35,21 @@ public class GUI extends javax.swing.JFrame {
         dbText = new javax.swing.JTextField();
         dbBrowseBTN = new javax.swing.JButton();
         openBTN = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jPanel1 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        zone2BTN = new javax.swing.JCheckBox();
+        zone3BTN = new javax.swing.JCheckBox();
+        zone4BTN = new javax.swing.JCheckBox();
+        zone5BTN = new javax.swing.JCheckBox();
+        zone7BTN = new javax.swing.JCheckBox();
+        zone8BTN = new javax.swing.JCheckBox();
+        zone6BTN = new javax.swing.JCheckBox();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,19 +69,136 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        zone2BTN.setText("Zone 2");
+
+        zone3BTN.setText("Zone 3");
+
+        zone4BTN.setText("Zone 4");
+
+        zone5BTN.setText("Zone 5");
+
+        zone7BTN.setText("Zone 7");
+
+        zone8BTN.setText("Zone 8");
+
+        zone6BTN.setText("Zone 6");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(zone2BTN)
+                    .addComponent(zone3BTN)
+                    .addComponent(zone4BTN)
+                    .addComponent(zone5BTN)
+                    .addComponent(zone6BTN)
+                    .addComponent(zone7BTN)
+                    .addComponent(zone8BTN))
+                .addContainerGap(279, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(zone2BTN)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(zone3BTN)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(zone4BTN)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(zone5BTN)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(zone6BTN)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(zone7BTN)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(zone8BTN)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Hardiness Zone", jPanel2);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 351, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Light and Moisture", jPanel3);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 351, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab3", jPanel4);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 351, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab4", jPanel5);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dbText, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(dbBrowseBTN)
-                .addGap(18, 18, 18)
-                .addComponent(openBTN)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dbText)
+                        .addGap(18, 18, 18)
+                        .addComponent(dbBrowseBTN)
+                        .addGap(18, 18, 18)
+                        .addComponent(openBTN))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -76,7 +210,11 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(dbText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dbBrowseBTN)
                     .addComponent(openBTN))
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -95,6 +233,54 @@ public class GUI extends javax.swing.JFrame {
     private void openBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openBTNActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_openBTNActionPerformed
+
+    String getParams() {
+        String finalQuery = "";
+        ArrayList<String> queryCompiler = new ArrayList<>();
+        if (!getParams_zone().equals("")) {
+            queryCompiler.add(getParams_zone());
+        }
+
+        return finalQuery;
+    }
+
+    String getParams_zone() {
+        ArrayList<String> params = new ArrayList<String>();
+        StringBuilder zoneParams = new StringBuilder("");
+        if (zone2BTN.isSelected()) {
+            params.add("plantzones.zone = '2'");
+        };
+        if (zone3BTN.isSelected()) {
+            params.add("plantzones.zone = '3'");
+        };
+        if (zone4BTN.isSelected()) {
+            params.add("plantzones.zone = '4'");
+        };
+        if (zone5BTN.isSelected()) {
+            params.add("plantzones.zone = '5'");
+        };
+        if (zone6BTN.isSelected()) {
+            params.add("plantzones.zone = '6'");
+        };
+        if (zone7BTN.isSelected()) {
+            params.add("plantzones.zone = '7'");
+        };
+        if (zone8BTN.isSelected()) {
+            params.add("plantzones.zone = '8'");
+        };
+        if (params.size() > 0) {
+            zoneParams.append("(");
+
+            for (int i = 0; i < params.size(); i++) {
+                if (i > 0) {
+                    zoneParams.append(" OR ");
+                }
+                zoneParams.append(params.get(i));
+            }
+            zoneParams.append(")");
+        }
+        return zoneParams.toString();
+    }
 
     /**
      * @param args the command line arguments
@@ -135,6 +321,21 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton dbBrowseBTN;
     private javax.swing.JTextField dbText;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton openBTN;
+    private javax.swing.JCheckBox zone2BTN;
+    private javax.swing.JCheckBox zone3BTN;
+    private javax.swing.JCheckBox zone4BTN;
+    private javax.swing.JCheckBox zone5BTN;
+    private javax.swing.JCheckBox zone6BTN;
+    private javax.swing.JCheckBox zone7BTN;
+    private javax.swing.JCheckBox zone8BTN;
     // End of variables declaration//GEN-END:variables
 }
