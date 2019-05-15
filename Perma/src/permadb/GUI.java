@@ -18,7 +18,9 @@ public class GUI extends javax.swing.JFrame {
 
     Connection SQL;
     boolean first = true; // ugh, figure a way aroud this global
-    
+    String query = "select * from plants"
+            + " inner join plantzones on plants.plantid = plantzones.plantid ";
+
     /*
      * Creates new form GUI
      */
@@ -309,7 +311,7 @@ public class GUI extends javax.swing.JFrame {
         zoneList.setListData(new String[]{"Zone 2", "Zone 3", "Zone 4", "Zone 5", "Zone 6", "Zone 7", "Zone 8"});
         lightList.setListData(new String[]{"Full Sun", "Partial Shade", "Shade"});
         moistureList.setListData(new String[]{"Xeric", "Mesic", "Hydric"});
-        habitatList.setListData(new String[]{"Prairies", "Gaps/Clearings", "Open Woods", "Forest", "Disturbed", "Meadows", "Old Fields", "Edges", "Conifer Forest", "Thickets"});
+        habitatList.setListData(new String[]{"Prairies", "Gaps/Clearings", "Open Woods", "Forest", "Disturbed", "Meadows", "Old Fields", "Edges", "Conifer Forests", "Thickets"});
     }
 
     void updateResults() throws SQLException {
@@ -338,23 +340,58 @@ public class GUI extends javax.swing.JFrame {
         return input;
     }
 
+    // Struct: input[0] inner join alias, input[1] where conditionals
+    StringBuilder[] appendParamsArr(StringBuilder input[], String[] inputArray, String table) {
+        int counter = 0;
+        for (String join : inputArray) {
+            input[0].append(" INNER JOIN " + table + " " + table + counter + " on plants.plantid = " + table + counter + ".plantid");
+            if (first) {
+                input[1].append(" WHERE " + table + counter).append(join);
+                first = false;
+            } else {
+                input[1].append(" AND "+ table + counter).append(join);
+            }
+            counter++;
+        }
+        return input;
+    }
+
+    String[] getParamArray() {
+        String[] params = new String[2];
+
+        return params;
+    }
+
     String getParams() {
         first = true; // reset global, determines where/or in query
         String nameType = "genus, species ";
-        StringBuilder query = new StringBuilder("Select distinct " + nameType + " from plants"
-                + " inner join plantzones on plants.plantid = plantzones.plantid "
-                + " inner join light on plants.plantid = light.plantid "
-                + " inner join moisture on plants.plantid = moisture.plantid"
-                + " inner join habitat on plants.plantid = habitat.plantid");
+        StringBuilder query = new StringBuilder("Select " + nameType + " from plants ");
+       //         + " inner join plantzones on plants.plantid = plantzones.plantid "
+       //         + " inner join light on plants.plantid = light.plantid "
+       //         + " inner join moisture on plants.plantid = moisture.plantid"
+       //         + " inner join habitat on plants.plantid = habitat.plantid");
 
+        StringBuilder[] queryArr = new StringBuilder[2];
+        queryArr[0] = query;
+        queryArr[1] = new StringBuilder();
+        
+        queryArr = appendParamsArr(queryArr,getZoneParams(),"plantzones");
+        queryArr = appendParamsArr(queryArr,getLightParams(),"light");
+        queryArr = appendParamsArr(queryArr,getMoistureParams(),"moisture");
+        queryArr = appendParamsArr(queryArr,getHabitatParams(),"habitat");
+        /*
         query = appendParams(query, getZoneParams());
         query = appendParams(query, getLightParams());
         query = appendParams(query, getMoistureParams());
         query = appendParams(query, getHabitatParams());
 
         query.append(" order by plants.plantid");
+       
         System.out.println(query.toString());
         return query.toString();
+         */
+        System.out.println(queryArr[0].toString() + " " + queryArr[1].toString());
+        return queryArr[0].toString() + " " + queryArr[1].toString();
     }
 
     String[] getMoistureParams() {
@@ -362,7 +399,7 @@ public class GUI extends javax.swing.JFrame {
         int[] moistureIndex = moistureList.getSelectedIndices();
         String[] output = new String[moistureIndex.length];
         for (int i = 0; i < moistureIndex.length; i++) {
-            output[i] = "moisture.moistureType = '" + moisture[moistureIndex[i]] + "'";
+            output[i] = ".moistureType = '" + moisture[moistureIndex[i]] + "'";
         }
         return output;
     }
@@ -372,7 +409,7 @@ public class GUI extends javax.swing.JFrame {
         int[] zoneIndex = zoneList.getSelectedIndices();
         String[] output = new String[zoneIndex.length];
         for (int i = 0; i < zoneIndex.length; i++) {
-            output[i] = "plantzones.zone = " + zones[zoneIndex[i]];
+            output[i] = ".zone = " + zones[zoneIndex[i]];
         }
         return output;
     }
@@ -382,17 +419,17 @@ public class GUI extends javax.swing.JFrame {
         int[] lightIndex = lightList.getSelectedIndices();
         String[] output = new String[lightIndex.length];
         for (int i = 0; i < lightIndex.length; i++) {
-            output[i] = "light.lightType = '" + light[lightIndex[i]] + "'";
+            output[i] = ".lightType = '" + light[lightIndex[i]] + "'";
         }
         return output;
     }
 
     String[] getHabitatParams() {
-        String[] habitat = {"Prairies", "Gaps/Clearings", "Open Woods", "Forest", "Disturbed", "Meadows", "Old Fields", "Edges", "Conifer Forest", "Thickets"};
+        String[] habitat = {"Prairies", "Gaps/Clearings", "Open Woods", "Forest", "Disturbed", "Meadows", "Old Fields", "Edges", "Conifer Forests", "Thickets"};
         int[] habitatIndex = habitatList.getSelectedIndices();
         String[] output = new String[habitatIndex.length];
         for (int i = 0; i < habitatIndex.length; i++) {
-            output[i] = "habitat.habitat = '" + habitat[habitatIndex[i]] + "'";
+            output[i] = ".habitat = '" + habitat[habitatIndex[i]] + "'";
         }
         return output;
     }
