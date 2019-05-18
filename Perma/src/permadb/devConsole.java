@@ -51,26 +51,6 @@ public class devConsole extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         insertCSVBrowseBTN = new javax.swing.JButton();
         insertCSVRunBTN = new javax.swing.JButton();
-        plantInputPanel = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        plantInputZone1BTN = new javax.swing.JCheckBox();
-        jLabel7 = new javax.swing.JLabel();
-        plantInputGenusText = new javax.swing.JTextField();
-        plantInputSpeciesText = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        plantInputCommonText = new javax.swing.JTextArea();
-        plantInputAddBTN = new javax.swing.JButton();
-        plantInputZone2BTN = new javax.swing.JCheckBox();
-        plantInputZone3BTN = new javax.swing.JCheckBox();
-        plantInputZone6BTN = new javax.swing.JCheckBox();
-        plantInputZone4BTN = new javax.swing.JCheckBox();
-        plantInputZone5BTN = new javax.swing.JCheckBox();
-        plantInputZone9BTN = new javax.swing.JCheckBox();
-        plantInputZone7BTN = new javax.swing.JCheckBox();
-        plantInputZone8BTN = new javax.swing.JCheckBox();
-        clearFieldsBTN = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -269,146 +249,6 @@ public class devConsole extends javax.swing.JFrame {
 
         mainPanel.addTab("Insert by CSV", insertCSV);
 
-        jLabel4.setText("Genus");
-
-        jLabel5.setText("Species");
-
-        jLabel6.setText("Common Names (Comma Separated)");
-
-        plantInputZone1BTN.setText("1");
-        plantInputZone1BTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                plantInputZone1BTNActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("Zones");
-
-        plantInputCommonText.setColumns(20);
-        plantInputCommonText.setLineWrap(true);
-        plantInputCommonText.setRows(5);
-        jScrollPane1.setViewportView(plantInputCommonText);
-
-        plantInputAddBTN.setText("Add");
-        plantInputAddBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                plantInputAddBTNActionPerformed(evt);
-            }
-        });
-
-        plantInputZone2BTN.setText("2");
-
-        plantInputZone3BTN.setText("3");
-
-        plantInputZone6BTN.setText("6");
-
-        plantInputZone4BTN.setText("4");
-
-        plantInputZone5BTN.setText("5");
-
-        plantInputZone9BTN.setText("9");
-
-        plantInputZone7BTN.setText("7");
-
-        plantInputZone8BTN.setText("8");
-
-        clearFieldsBTN.setText("Clear Fields After");
-
-        javax.swing.GroupLayout plantInputPanelLayout = new javax.swing.GroupLayout(plantInputPanel);
-        plantInputPanel.setLayout(plantInputPanelLayout);
-        plantInputPanelLayout.setHorizontalGroup(
-            plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plantInputPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(plantInputPanelLayout.createSequentialGroup()
-                        .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(plantInputPanelLayout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(jLabel4))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(plantInputSpeciesText)
-                            .addComponent(plantInputGenusText))
-                        .addGap(18, 18, 18)
-                        .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addGroup(plantInputPanelLayout.createSequentialGroup()
-                                .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(plantInputZone1BTN)
-                                    .addComponent(plantInputZone2BTN)
-                                    .addComponent(plantInputZone3BTN))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(plantInputZone4BTN)
-                                        .addComponent(plantInputZone5BTN))
-                                    .addComponent(plantInputZone6BTN))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(plantInputZone7BTN)
-                                    .addComponent(plantInputZone8BTN)
-                                    .addComponent(plantInputZone9BTN))))
-                        .addGap(31, 31, 31))
-                    .addGroup(plantInputPanelLayout.createSequentialGroup()
-                        .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))
-                        .addGap(18, 18, 18)
-                        .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(plantInputAddBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(clearFieldsBTN))
-                        .addGap(20, 20, 20))))
-        );
-        plantInputPanelLayout.setVerticalGroup(
-            plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(plantInputPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(plantInputPanelLayout.createSequentialGroup()
-                        .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(plantInputGenusText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(plantInputSpeciesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)))
-                    .addGroup(plantInputPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(plantInputPanelLayout.createSequentialGroup()
-                                .addComponent(plantInputZone1BTN)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(plantInputZone2BTN))
-                            .addGroup(plantInputPanelLayout.createSequentialGroup()
-                                .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(plantInputZone7BTN)
-                                    .addComponent(plantInputZone4BTN))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(plantInputZone8BTN)
-                                    .addComponent(plantInputZone5BTN))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(plantInputZone9BTN)
-                                    .addComponent(plantInputZone6BTN)
-                                    .addComponent(plantInputZone3BTN))))))
-                .addGap(27, 27, 27)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(plantInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(plantInputPanelLayout.createSequentialGroup()
-                        .addComponent(clearFieldsBTN)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addComponent(plantInputAddBTN))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        mainPanel.addTab("Plant Input", plantInputPanel);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -470,35 +310,6 @@ public class devConsole extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_dbInitCreateButtonActionPerformed
 
-    private void insertZoneHelper(String plantId) throws SQLException {
-        if (plantInputZone1BTN.isSelected()) {
-            creator.insertZones(plantId, 1);
-        }
-        if (plantInputZone2BTN.isSelected()) {
-            creator.insertZones(plantId, 2);
-        }
-        if (plantInputZone3BTN.isSelected()) {
-            creator.insertZones(plantId, 3);
-        }
-        if (plantInputZone4BTN.isSelected()) {
-            creator.insertZones(plantId, 4);
-        }
-        if (plantInputZone5BTN.isSelected()) {
-            creator.insertZones(plantId, 5);
-        }
-        if (plantInputZone6BTN.isSelected()) {
-            creator.insertZones(plantId, 6);
-        }
-        if (plantInputZone7BTN.isSelected()) {
-            creator.insertZones(plantId, 7);
-        }
-        if (plantInputZone8BTN.isSelected()) {
-            creator.insertZones(plantId, 8);
-        }
-        if (plantInputZone9BTN.isSelected()) {
-            creator.insertZones(plantId, 9);
-        }
-    }
 
     private void dbInitCloseBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbInitCloseBTNActionPerformed
         creator.closeConnection();
@@ -513,40 +324,6 @@ public class devConsole extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
-    private void plantInputAddBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plantInputAddBTNActionPerformed
-    /*    if (plantInputFieldsComplete()) {
-            String plantId = plantInputGenusText.getText().trim().substring(0, 3)
-                    + plantInputSpeciesText.getText().trim().substring(0, 3);
-            try {
-
-                String[] plantInfo = new String[4];
-                plantInfo[0] = plantId;
-
-                plantInfo[1] = plantInputGenusText.getText().trim();
-                plantInfo[2] = plantInputSpeciesText.getText().trim();
-
-                // Constructor method, also returns the modified plantID that accounts for dupes
-                plantId = creator.insertPlant(plantInfo);
-
-                insertZoneHelper(plantId);
-
-                if (!(plantInputCommonText.getText().equals(""))) {
-                    creator.insertPlantNames(plantId, plantInputCommonText.getText());
-                }
-
-                if (clearFieldsBTN.isSelected()) {
-                    plantInputClearFields();
-                }
-            } catch (SQLException e) {
-                System.out.println(e);
-            }
-        }*/
-    }//GEN-LAST:event_plantInputAddBTNActionPerformed
-
-    private void plantInputZone1BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plantInputZone1BTNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_plantInputZone1BTNActionPerformed
-
     private void insertCSVBrowseBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertCSVBrowseBTNActionPerformed
         JFileChooser chooser = new JFileChooser();
         int returnVal = chooser.showOpenDialog(null);
@@ -565,32 +342,6 @@ public class devConsole extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_insertCSVRunBTNActionPerformed
-
-    // Checks all fields for population
-    boolean plantInputFieldsComplete() {
-        boolean complete = true;
-        if (plantInputSpeciesText.getText().equals("")
-                || plantInputGenusText.getText().equals("")) {
-            complete = false;
-            System.out.println("Some fields aren't filled in, fix it");
-        }
-        return complete;
-    }
-
-    void plantInputClearFields() {
-        plantInputSpeciesText.setText("");
-        plantInputGenusText.setText("");
-        plantInputCommonText.setText("");
-        plantInputZone1BTN.setSelected(false);
-        plantInputZone2BTN.setSelected(false);
-        plantInputZone3BTN.setSelected(false);
-        plantInputZone4BTN.setSelected(false);
-        plantInputZone5BTN.setSelected(false);
-        plantInputZone6BTN.setSelected(false);
-        plantInputZone7BTN.setSelected(false);
-        plantInputZone8BTN.setSelected(false);
-        plantInputZone9BTN.setSelected(false);
-    }
 
     /**
      * @param args the command line arguments
@@ -635,7 +386,6 @@ public class devConsole extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox clearFieldsBTN;
     private javax.swing.JButton dbInitBrowse;
     private javax.swing.JButton dbInitCloseBTN;
     private javax.swing.JButton dbInitCreateButton;
@@ -653,28 +403,9 @@ public class devConsole extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane mainPanel;
-    private javax.swing.JButton plantInputAddBTN;
-    private javax.swing.JTextArea plantInputCommonText;
-    private javax.swing.JTextField plantInputGenusText;
-    private javax.swing.JPanel plantInputPanel;
-    private javax.swing.JTextField plantInputSpeciesText;
-    private javax.swing.JCheckBox plantInputZone1BTN;
-    private javax.swing.JCheckBox plantInputZone2BTN;
-    private javax.swing.JCheckBox plantInputZone3BTN;
-    private javax.swing.JCheckBox plantInputZone4BTN;
-    private javax.swing.JCheckBox plantInputZone5BTN;
-    private javax.swing.JCheckBox plantInputZone6BTN;
-    private javax.swing.JCheckBox plantInputZone7BTN;
-    private javax.swing.JCheckBox plantInputZone8BTN;
-    private javax.swing.JCheckBox plantInputZone9BTN;
     // End of variables declaration//GEN-END:variables
 }

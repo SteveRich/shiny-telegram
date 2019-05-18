@@ -348,13 +348,16 @@ public class PermaDBpopulate extends generalUtils {
             output[6] = "1";
         }
         System.out.println("Invert Shelter: " + output[6]);
+        
         if (inputSplit[42].equalsIgnoreCase("y")) { // Ground Cover
             output[7] = "1";
         }
         System.out.println("Ground Cover: " + output[7]);
+        
         if (inputSplit[45].equalsIgnoreCase("p")) { // Poison
             output[8] = "1";
         }
+        
         System.out.println("Poison: " + output[8]);
         return output;
 
@@ -481,7 +484,7 @@ public class PermaDBpopulate extends generalUtils {
                 String query = "Insert into light values (?,?)";
                 PreparedStatement SQLquery = SQL.prepareStatement(query);
                 SQLquery.setString(1, plantId);
-                SQLquery.setString(2, shadeSt);
+                SQLquery.setString(2, getLightString(shadeChar));
                 SQLquery.execute();
                 SQLquery.close();
                 System.out.println("Added light entry: " + plantId + ", " + shadeSt);
@@ -489,7 +492,20 @@ public class PermaDBpopulate extends generalUtils {
         }
     }
 
-    // Splits and inserts moisture. 
+    String getLightString(char input) {
+        String output = "";
+        if (input == 'f' || input == 'F') {
+            output = "Full Sun";
+        } else if (input == 's' || input == 'S') {
+            output = "Shade";
+        } else if (input == 'p' || input == 'P') {
+            output = "Partial Shade";
+        }
+
+        return output;
+    }
+
+// Splits and inserts moisture. 
     void insertMoisture(String plantId, String moisture) throws SQLException {
         char[] moistureSplit = moisture.replace("-", "").toCharArray();
         for (char moistureChar : moistureSplit) {
@@ -619,6 +635,7 @@ public class PermaDBpopulate extends generalUtils {
                 + "moisture varchar,"
                 + "FOREIGN KEY(plantid) REFERENCES plants(plantid))";
 
+        // @todo
         String soilph = "Create table soilph"
                 + "(plantid varchar,"
                 + "soilph varchar,"

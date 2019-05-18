@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package permadb;
 
 import javax.swing.JFileChooser;
@@ -12,16 +7,14 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Firma
+ * @author Steve Rich
  */
 public class GUI extends javax.swing.JFrame {
 
     Connection SQL;
 
     boolean first = true; // ugh, figure a way aroud this global
-    //String query = "select * from plants"
-    //        + " inner join plantzones on plants.plantid = plantzones.plantid ";
-
+    
     /*
      * Creates new form GUI
      */
@@ -44,6 +37,11 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        n2Group = new javax.swing.ButtonGroup();
+        mineralGroup = new javax.swing.ButtonGroup();
+        invertGroup = new javax.swing.ButtonGroup();
+        groundCoverGroup = new javax.swing.ButtonGroup();
+        poisonGroup = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         resultList = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
@@ -58,6 +56,23 @@ public class GUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        n2YesBTN = new javax.swing.JCheckBox();
+        n2NoBTN = new javax.swing.JCheckBox();
+        mineralYesBTN = new javax.swing.JCheckBox();
+        mineralNoBTN = new javax.swing.JCheckBox();
+        invertYesBTN = new javax.swing.JCheckBox();
+        invertNoBTN = new javax.swing.JCheckBox();
+        groundCoverYesBTN = new javax.swing.JCheckBox();
+        groundCoverNoBTN = new javax.swing.JCheckBox();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        poisonYesBTN = new javax.swing.JCheckBox();
+        poisonNoBTN = new javax.swing.JCheckBox();
+        jLabel11 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         habitatList = new javax.swing.JList<>();
@@ -100,6 +115,90 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel7.setText("Moisture");
 
+        jLabel1.setText("Yes");
+
+        jLabel3.setText("No");
+
+        jLabel4.setText("N2 Fixer");
+
+        n2Group.add(n2YesBTN);
+        n2YesBTN.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                n2YesBTNStateChanged(evt);
+            }
+        });
+
+        n2Group.add(n2NoBTN);
+        n2NoBTN.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                n2NoBTNStateChanged(evt);
+            }
+        });
+
+        mineralGroup.add(mineralYesBTN);
+        mineralYesBTN.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                mineralYesBTNStateChanged(evt);
+            }
+        });
+
+        mineralGroup.add(mineralNoBTN);
+        mineralNoBTN.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                mineralNoBTNStateChanged(evt);
+            }
+        });
+
+        invertGroup.add(invertYesBTN);
+        invertYesBTN.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                invertYesBTNStateChanged(evt);
+            }
+        });
+
+        invertGroup.add(invertNoBTN);
+        invertNoBTN.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                invertNoBTNStateChanged(evt);
+            }
+        });
+
+        groundCoverGroup.add(groundCoverYesBTN);
+        groundCoverYesBTN.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                groundCoverYesBTNStateChanged(evt);
+            }
+        });
+
+        groundCoverGroup.add(groundCoverNoBTN);
+        groundCoverNoBTN.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                groundCoverNoBTNStateChanged(evt);
+            }
+        });
+
+        jLabel8.setText("Mineral Accum");
+
+        jLabel9.setText("Invert Shelter");
+
+        jLabel10.setText("Ground Cover");
+
+        poisonGroup.add(poisonYesBTN);
+        poisonYesBTN.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                poisonYesBTNStateChanged(evt);
+            }
+        });
+
+        poisonGroup.add(poisonNoBTN);
+        poisonNoBTN.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                poisonNoBTNStateChanged(evt);
+            }
+        });
+
+        jLabel11.setText("Poison");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -117,7 +216,46 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(n2YesBTN))
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(n2NoBTN)
+                            .addComponent(jLabel3)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mineralYesBTN)
+                        .addGap(18, 18, 18)
+                        .addComponent(mineralNoBTN))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(invertYesBTN)
+                        .addGap(18, 18, 18)
+                        .addComponent(invertNoBTN))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(poisonYesBTN)
+                                .addGap(18, 18, 18)
+                                .addComponent(poisonNoBTN))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(groundCoverYesBTN)
+                                .addGap(18, 18, 18)
+                                .addComponent(groundCoverNoBTN)))))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,12 +264,39 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(n2YesBTN)
+                            .addComponent(n2NoBTN))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mineralYesBTN)
+                            .addComponent(mineralNoBTN)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(invertYesBTN)
+                            .addComponent(invertNoBTN)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(groundCoverYesBTN)
+                            .addComponent(groundCoverNoBTN)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(poisonYesBTN)
+                            .addComponent(poisonNoBTN)
+                            .addComponent(jLabel11))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -155,7 +320,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(473, Short.MAX_VALUE))
+                .addContainerGap(417, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +338,7 @@ public class GUI extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 581, Short.MAX_VALUE)
+            .addGap(0, 525, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +357,7 @@ public class GUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -218,79 +383,95 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void habitatListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_habitatListValueChanged
-        if (evt.getValueIsAdjusting()) {
-            try {
-                updateResults();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
+        updateResults();
     }//GEN-LAST:event_habitatListValueChanged
 
     private void moistureListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_moistureListValueChanged
-        if (evt.getValueIsAdjusting()) {
-            try {
-                updateResults();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
+        updateResults();
     }//GEN-LAST:event_moistureListValueChanged
 
     private void lightListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lightListValueChanged
-        if (evt.getValueIsAdjusting()) {
-            try {
-                updateResults();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
+        updateResults();
     }//GEN-LAST:event_lightListValueChanged
 
     private void zoneListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_zoneListValueChanged
-        if (evt.getValueIsAdjusting()) {
-            try {
-                updateResults();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
+        updateResults();
     }//GEN-LAST:event_zoneListValueChanged
 
+    private void n2YesBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_n2YesBTNStateChanged
+        updateResults();
+    }//GEN-LAST:event_n2YesBTNStateChanged
+
+    private void n2NoBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_n2NoBTNStateChanged
+        updateResults();
+    }//GEN-LAST:event_n2NoBTNStateChanged
+
+    private void mineralYesBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_mineralYesBTNStateChanged
+        updateResults();
+    }//GEN-LAST:event_mineralYesBTNStateChanged
+
+    private void mineralNoBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_mineralNoBTNStateChanged
+        updateResults();
+    }//GEN-LAST:event_mineralNoBTNStateChanged
+
+    private void invertYesBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_invertYesBTNStateChanged
+        updateResults();
+    }//GEN-LAST:event_invertYesBTNStateChanged
+
+    private void invertNoBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_invertNoBTNStateChanged
+        updateResults();
+    }//GEN-LAST:event_invertNoBTNStateChanged
+
+    private void groundCoverYesBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_groundCoverYesBTNStateChanged
+        updateResults();
+    }//GEN-LAST:event_groundCoverYesBTNStateChanged
+
+    private void groundCoverNoBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_groundCoverNoBTNStateChanged
+        updateResults();
+    }//GEN-LAST:event_groundCoverNoBTNStateChanged
+
+    private void poisonYesBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_poisonYesBTNStateChanged
+        updateResults();
+    }//GEN-LAST:event_poisonYesBTNStateChanged
+
+    private void poisonNoBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_poisonNoBTNStateChanged
+        updateResults();
+    }//GEN-LAST:event_poisonNoBTNStateChanged
+
     void initLists() {
-        zoneList.setListData(new String[]{"Zone 2", "Zone 3", "Zone 4", "Zone 5", "Zone 6", "Zone 7", "Zone 8"});
+        zoneList.setListData(new String[]{"2", "3", "4", "5", "6", "7", "8"});
         lightList.setListData(new String[]{"Full Sun", "Partial Shade", "Shade"});
         moistureList.setListData(new String[]{"Xeric", "Mesic", "Hydric"});
         habitatList.setListData(new String[]{"Prairies", "Gaps/Clearings", "Open Woods", "Forest", "Disturbed", "Meadows", "Old Fields", "Edges", "Conifer Forest", "Thickets"});
     }
 
-    void updateResults() throws SQLException {
-        List<String> output = new ArrayList<>();
-        String query = getParams();
-        PreparedStatement SQLquery = SQL.prepareStatement(query);
-        ResultSet results = SQLquery.executeQuery();
-        while (results.next()) {
-            output.add(results.getString("genus") + " " + results.getString("species"));
+    // Main event updater, calls and executes new query on each button/checkbox event
+    void updateResults() {
+        try {
+            List<String> output = new ArrayList<>();
+            String query = getParams();
+            PreparedStatement SQLquery = SQL.prepareStatement(query);
+            ResultSet results = SQLquery.executeQuery();
+            while (results.next()) {
+                output.add(results.getString("genus") + " " + results.getString("species"));
+            }
+            String[] listData = new String[]{};
+            listData = output.toArray(listData);
+            resultList.setListData(listData);
+        } catch (SQLException e) {
+            System.out.println(e);
         }
-        String[] listData = new String[]{};
-        listData = output.toArray(listData);
-        resultList.setListData(listData);
-
     }
 
+    // Handles each value, assigns "Where" if it's the first in the list, else "And"
     StringBuilder appendParams(StringBuilder input, String[] inputArray) {
         for (String value : inputArray) {
-            if (first) {
-                input.append(" WHERE ").append(value);
-                first = false;
-            } else {
-                input.append(" AND ").append(value);
-            }
+            input.append(getConditional()).append(value);
         }
         return input;
     }
 
-    // Struct: input[0] inner join alias, input[1] where conditionals
+    // Struct: input[0] contains all tables and joins, input[1] contains all conditionals
     StringBuilder[] appendParamsArr(StringBuilder input[], String[] inputArray, String table) {
         int counter = 0;
         for (String join : inputArray) {
@@ -306,51 +487,70 @@ public class GUI extends javax.swing.JFrame {
         return input;
     }
 
-    String[] getParamArray() {
-        String[] params = new String[2];
-
-        return params;
-    }
-
+    // Polls each list and all check boxes to build the search query
     String getParams() {
         first = true; // reset global, determines where/or in query
         String nameType = "genus, species ";
         StringBuilder query = new StringBuilder("Select " + nameType + " from plants ");
-        //         + " inner join plantzones on plants.plantid = plantzones.plantid "
-        //         + " inner join light on plants.plantid = light.plantid "
-        //         + " inner join moisture on plants.plantid = moisture.plantid"
-        //         + " inner join habitat on plants.plantid = habitat.plantid");
 
         StringBuilder[] queryArr = new StringBuilder[2];
         queryArr[0] = query;
         queryArr[1] = new StringBuilder();
 
-        queryArr = appendParamsArr(queryArr, getZoneParams(), "zone");
-        queryArr = appendParamsArr(queryArr, getLightParams(), "light");
-
+        queryArr = appendParamsArr(queryArr, getListParams(lightList, "light"), "light");
+        queryArr = appendParamsArr(queryArr, getListParams(zoneList, "zone"), "zone");
         queryArr = appendParamsArr(queryArr, getListParams(moistureList, "moisture"), "moisture");
         queryArr = appendParamsArr(queryArr, getListParams(habitatList, "habitat"), "habitat");
+
+        query.append(getCheckBoxParams());
 
         System.out.println(queryArr[0].toString() + " " + queryArr[1].toString());
         return queryArr[0].toString() + " " + queryArr[1].toString();
     }
 
-    String[] getZoneParams() {
-        int[] zones = {2, 3, 4, 5, 6, 7, 8};
-        int[] zoneIndex = zoneList.getSelectedIndices();
-        String[] output = new String[zoneIndex.length];
-        for (int i = 0; i < zoneIndex.length; i++) {
-            output[i] = ".zone = " + zones[zoneIndex[i]];
+    // Handles all of the checkboxes for plant tables, only conditionals so returns String
+    String getCheckBoxParams() {
+        StringBuilder output = new StringBuilder();
+
+        if (n2YesBTN.isSelected()) {
+            output.append(getConditional()).append("plants.n2Fixer = 1 ");
+        } else if (n2NoBTN.isSelected()) {
+            output.append(getConditional()).append("plants.n2Fixer = 0 ");
         }
-        return output;
+
+        if (mineralYesBTN.isSelected()) {
+            output.append(getConditional()).append("plants.mineralAccum = 1 ");
+        } else if (mineralNoBTN.isSelected()) {
+            output.append(getConditional()).append("plants.mineralAccum = 0 ");
+        }
+
+        if (invertYesBTN.isSelected()) {
+            output.append(getConditional()).append("plants.invertShelter = 1 ");
+        } else if (invertNoBTN.isSelected()) {
+            output.append(getConditional()).append("plants.invertShelter = 0 ");
+        }
+
+        if (groundCoverYesBTN.isSelected()) {
+            output.append(getConditional()).append("plants.groundCover = 1 ");
+        } else if (groundCoverNoBTN.isSelected()) {
+            output.append(getConditional()).append("plants.groundCover = 0 ");
+        }
+
+        if (poisonYesBTN.isSelected()) {
+            output.append(getConditional()).append("plants.poison = 1 ");
+        } else if (poisonNoBTN.isSelected()) {
+            output.append(getConditional()).append("plants.poison = 0 ");
+        }
+
+        return output.toString();
     }
 
-    String[] getLightParams() {
-        String[] light = {"F", "P", "S"};
-        int[] lightIndex = lightList.getSelectedIndices();
-        String[] output = new String[lightIndex.length];
-        for (int i = 0; i < lightIndex.length; i++) {
-            output[i] = ".light = '" + light[lightIndex[i]] + "'";
+    // Returns and/where depending on status of global boolean 'first'
+    String getConditional() {
+        String output = " AND ";
+        if (first) {
+            output = " WHERE ";
+            first = false;
         }
         return output;
     }
@@ -420,11 +620,24 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup groundCoverGroup;
+    private javax.swing.JCheckBox groundCoverNoBTN;
+    private javax.swing.JCheckBox groundCoverYesBTN;
     private javax.swing.JList<String> habitatList;
+    private javax.swing.ButtonGroup invertGroup;
+    private javax.swing.JCheckBox invertNoBTN;
+    private javax.swing.JCheckBox invertYesBTN;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -436,7 +649,16 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JList<String> lightList;
+    private javax.swing.ButtonGroup mineralGroup;
+    private javax.swing.JCheckBox mineralNoBTN;
+    private javax.swing.JCheckBox mineralYesBTN;
     private javax.swing.JList<String> moistureList;
+    private javax.swing.ButtonGroup n2Group;
+    private javax.swing.JCheckBox n2NoBTN;
+    private javax.swing.JCheckBox n2YesBTN;
+    private javax.swing.ButtonGroup poisonGroup;
+    private javax.swing.JCheckBox poisonNoBTN;
+    private javax.swing.JCheckBox poisonYesBTN;
     private javax.swing.JList<String> resultList;
     private javax.swing.JList<String> zoneList;
     // End of variables declaration//GEN-END:variables
