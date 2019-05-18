@@ -17,9 +17,10 @@ import java.util.ArrayList;
 public class GUI extends javax.swing.JFrame {
 
     Connection SQL;
+
     boolean first = true; // ugh, figure a way aroud this global
-    String query = "select * from plants"
-            + " inner join plantzones on plants.plantid = plantzones.plantid ";
+    //String query = "select * from plants"
+    //        + " inner join plantzones on plants.plantid = plantzones.plantid ";
 
     /*
      * Creates new form GUI
@@ -27,6 +28,11 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
         initLists();
+        try {
+            SQL = openConnection();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -38,10 +44,6 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        dbText = new javax.swing.JTextField();
-        dbBrowseBTN = new javax.swing.JButton();
-        openBTN = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         resultList = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
@@ -63,22 +65,6 @@ public class GUI extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Database");
-
-        dbBrowseBTN.setText("Browse");
-        dbBrowseBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dbBrowseBTNActionPerformed(evt);
-            }
-        });
-
-        openBTN.setText("Open");
-        openBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                openBTNActionPerformed(evt);
-            }
-        });
 
         resultList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -146,7 +132,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Zone, Light, Moisture", jPanel2);
@@ -178,7 +164,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Habitat, Region", jPanel3);
@@ -191,7 +177,7 @@ public class GUI extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 257, Short.MAX_VALUE)
+            .addGap(0, 220, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("more more params", jPanel5);
@@ -200,13 +186,13 @@ public class GUI extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -214,58 +200,22 @@ public class GUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dbText)
-                        .addGap(18, 18, 18)
-                        .addComponent(dbBrowseBTN)
-                        .addGap(18, 18, 18)
-                        .addComponent(openBTN))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(dbText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dbBrowseBTN)
-                    .addComponent(openBTN))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void dbBrowseBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbBrowseBTNActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        int returnVal = chooser.showOpenDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            System.out.println("Database: "
-                    + chooser.getSelectedFile().getName());
-            dbText.setText(chooser.getSelectedFile().getPath());
-        }
-    }//GEN-LAST:event_dbBrowseBTNActionPerformed
-
-    private void openBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openBTNActionPerformed
-        try {
-            SQL = openConnection(dbText.getText());
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }//GEN-LAST:event_openBTNActionPerformed
 
     private void habitatListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_habitatListValueChanged
         if (evt.getValueIsAdjusting()) {
@@ -311,7 +261,7 @@ public class GUI extends javax.swing.JFrame {
         zoneList.setListData(new String[]{"Zone 2", "Zone 3", "Zone 4", "Zone 5", "Zone 6", "Zone 7", "Zone 8"});
         lightList.setListData(new String[]{"Full Sun", "Partial Shade", "Shade"});
         moistureList.setListData(new String[]{"Xeric", "Mesic", "Hydric"});
-        habitatList.setListData(new String[]{"Prairies", "Gaps/Clearings", "Open Woods", "Forest", "Disturbed", "Meadows", "Old Fields", "Edges", "Conifer Forests", "Thickets"});
+        habitatList.setListData(new String[]{"Prairies", "Gaps/Clearings", "Open Woods", "Forest", "Disturbed", "Meadows", "Old Fields", "Edges", "Conifer Forest", "Thickets"});
     }
 
     void updateResults() throws SQLException {
@@ -349,7 +299,7 @@ public class GUI extends javax.swing.JFrame {
                 input[1].append(" WHERE " + table + counter).append(join);
                 first = false;
             } else {
-                input[1].append(" AND "+ table + counter).append(join);
+                input[1].append(" AND " + table + counter).append(join);
             }
             counter++;
         }
@@ -366,42 +316,23 @@ public class GUI extends javax.swing.JFrame {
         first = true; // reset global, determines where/or in query
         String nameType = "genus, species ";
         StringBuilder query = new StringBuilder("Select " + nameType + " from plants ");
-       //         + " inner join plantzones on plants.plantid = plantzones.plantid "
-       //         + " inner join light on plants.plantid = light.plantid "
-       //         + " inner join moisture on plants.plantid = moisture.plantid"
-       //         + " inner join habitat on plants.plantid = habitat.plantid");
+        //         + " inner join plantzones on plants.plantid = plantzones.plantid "
+        //         + " inner join light on plants.plantid = light.plantid "
+        //         + " inner join moisture on plants.plantid = moisture.plantid"
+        //         + " inner join habitat on plants.plantid = habitat.plantid");
 
         StringBuilder[] queryArr = new StringBuilder[2];
         queryArr[0] = query;
         queryArr[1] = new StringBuilder();
-        
-        queryArr = appendParamsArr(queryArr,getZoneParams(),"plantzones");
-        queryArr = appendParamsArr(queryArr,getLightParams(),"light");
-        queryArr = appendParamsArr(queryArr,getMoistureParams(),"moisture");
-        queryArr = appendParamsArr(queryArr,getHabitatParams(),"habitat");
-        /*
-        query = appendParams(query, getZoneParams());
-        query = appendParams(query, getLightParams());
-        query = appendParams(query, getMoistureParams());
-        query = appendParams(query, getHabitatParams());
 
-        query.append(" order by plants.plantid");
-       
-        System.out.println(query.toString());
-        return query.toString();
-         */
+        queryArr = appendParamsArr(queryArr, getZoneParams(), "zone");
+        queryArr = appendParamsArr(queryArr, getLightParams(), "light");
+
+        queryArr = appendParamsArr(queryArr, getListParams(moistureList, "moisture"), "moisture");
+        queryArr = appendParamsArr(queryArr, getListParams(habitatList, "habitat"), "habitat");
+
         System.out.println(queryArr[0].toString() + " " + queryArr[1].toString());
         return queryArr[0].toString() + " " + queryArr[1].toString();
-    }
-
-    String[] getMoistureParams() {
-        String[] moisture = {"Xeric", "Mesic", "Hydric"};
-        int[] moistureIndex = moistureList.getSelectedIndices();
-        String[] output = new String[moistureIndex.length];
-        for (int i = 0; i < moistureIndex.length; i++) {
-            output[i] = ".moistureType = '" + moisture[moistureIndex[i]] + "'";
-        }
-        return output;
     }
 
     String[] getZoneParams() {
@@ -419,17 +350,25 @@ public class GUI extends javax.swing.JFrame {
         int[] lightIndex = lightList.getSelectedIndices();
         String[] output = new String[lightIndex.length];
         for (int i = 0; i < lightIndex.length; i++) {
-            output[i] = ".lightType = '" + light[lightIndex[i]] + "'";
+            output[i] = ".light = '" + light[lightIndex[i]] + "'";
         }
         return output;
     }
 
-    String[] getHabitatParams() {
-        String[] habitat = {"Prairies", "Gaps/Clearings", "Open Woods", "Forest", "Disturbed", "Meadows", "Old Fields", "Edges", "Conifer Forests", "Thickets"};
-        int[] habitatIndex = habitatList.getSelectedIndices();
-        String[] output = new String[habitatIndex.length];
-        for (int i = 0; i < habitatIndex.length; i++) {
-            output[i] = ".habitat = '" + habitat[habitatIndex[i]] + "'";
+    // Dynamically retrieves list contents, works when the list query match the db values
+    String[] getListParams(javax.swing.JList<String> inputList, String table) {
+        int listSize = inputList.getModel().getSize();
+        System.out.println("List size: " + listSize);
+        String[] listContents = new String[listSize];
+        for (int i = 0; i < listSize; i++) {
+            System.out.println(inputList.getModel().getElementAt(i));
+            listContents[i] = (inputList.getModel().getElementAt(i));
+        }
+
+        int[] listIndex = inputList.getSelectedIndices();
+        String[] output = new String[listIndex.length];
+        for (int i = 0; i < listIndex.length; i++) {
+            output[i] = "." + table + "= '" + listContents[listIndex[i]] + "'";
         }
         return output;
     }
@@ -474,11 +413,14 @@ public class GUI extends javax.swing.JFrame {
         return DriverManager.getConnection(url);
     }
 
+    Connection openConnection() throws SQLException {
+        // String url = "jdbc:sqlite:" + database;
+        String url = "jdbc:sqlite::resource:permaDB.db";
+        return DriverManager.getConnection(url);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton dbBrowseBTN;
-    private javax.swing.JTextField dbText;
     private javax.swing.JList<String> habitatList;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -495,7 +437,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JList<String> lightList;
     private javax.swing.JList<String> moistureList;
-    private javax.swing.JButton openBTN;
     private javax.swing.JList<String> resultList;
     private javax.swing.JList<String> zoneList;
     // End of variables declaration//GEN-END:variables

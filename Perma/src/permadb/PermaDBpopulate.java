@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 public class PermaDBpopulate extends generalUtils {
 
-    String[] tables = {"plantZones", "plantNames", "light",
+    String[] tables = {"zone", "plantName", "light",
         "moisture", "soilph", "habit", "form", "rootpattern",
         "growthrate", "nativeregion", "plants", "habitat", "edibility",
         "medicinal", "height", "width"};
@@ -233,7 +233,7 @@ public class PermaDBpopulate extends generalUtils {
                     + " " + results.getString("species"));
             System.out.print("Zones: ");
 
-            PreparedStatement plantDetailStatement = SQL.prepareStatement("Select zone from plantzones where plantid = ?");
+            PreparedStatement plantDetailStatement = SQL.prepareStatement("Select zone from zone where plantid = ?");
             plantDetailStatement.setString(1, plantId);
             ResultSet plantDetailResults = plantDetailStatement.executeQuery();
             while (plantDetailResults.next()) {
@@ -241,7 +241,7 @@ public class PermaDBpopulate extends generalUtils {
             }
 
             System.out.print("\nCommon Names: ");
-            plantDetailStatement = SQL.prepareStatement("Select name from plantNames where plantid = ?");
+            plantDetailStatement = SQL.prepareStatement("Select name from plantName where plantid = ?");
             plantDetailStatement.setString(1, plantId);
             plantDetailResults = plantDetailStatement.executeQuery();
             while (plantDetailResults.next()) {
@@ -546,7 +546,7 @@ public class PermaDBpopulate extends generalUtils {
 
         String[] plantNames = names.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
         for (String plantName : plantNames) {
-            String query = "Insert into plantNames values (?,?)";
+            String query = "Insert into plantName values (?,?)";
 
             PreparedStatement SQLquery = SQL.prepareStatement(query);
             SQLquery.setString(1, plantId);
@@ -559,7 +559,7 @@ public class PermaDBpopulate extends generalUtils {
 
     void insertZones(String plantId, int zone) throws SQLException {
 
-        String query = "Insert into plantZones values (?,?)";
+        String query = "Insert into zone values (?,?)";
         PreparedStatement SQLquery = SQL.prepareStatement(query);
         SQLquery.setString(1, plantId);
         SQLquery.setInt(2, zone);
@@ -570,7 +570,7 @@ public class PermaDBpopulate extends generalUtils {
 
     void deletePlants(String plantId) throws SQLException {
 
-        String[] tableList = {"plantzones", "plantNames", "plants"};  // Make sure these are in order if I use FK's
+        String[] tableList = {"zone", "plantName", "plants"};  // Make sure these are in order if I use FK's
 
         for (String table : tableList) {
             String query = "Delete from " + table + " where plantid = ?";
@@ -596,32 +596,32 @@ public class PermaDBpopulate extends generalUtils {
                 + "poison int)";
 
         // done
-        String plantZones = "Create table plantzones "
+        String plantZones = "Create table zone"
                 + "(plantid varchar,"
                 + "zone int,"
                 + "FOREIGN KEY(plantid) REFERENCES plants(plantid))";
 
         // done
-        String plantNames = "Create table plantNames"
+        String plantNames = "Create table plantName"
                 + "(plantid varchar,"
-                + "name varchar,"
+                + "plantName varchar,"
                 + "FOREIGN KEY(plantid) REFERENCES plants(plantid))";
 
         // done
         String light = "Create table light"
                 + "(plantid varchar,"
-                + "lightType varchar,"
+                + "light varchar,"
                 + "FOREIGN KEY(plantid) REFERENCES plants(plantid))";
 
         // done
         String moisture = "Create table moisture "
                 + "(plantid varchar,"
-                + "moistureType varchar,"
+                + "moisture varchar,"
                 + "FOREIGN KEY(plantid) REFERENCES plants(plantid))";
 
         String soilph = "Create table soilph"
                 + "(plantid varchar,"
-                + "phtype varchar,"
+                + "soilph varchar,"
                 + "FOREIGN KEY(plantid) REFERENCES plants(plantid))";
 
         // done
@@ -668,25 +668,25 @@ public class PermaDBpopulate extends generalUtils {
 
         String form = "Create table form"
                 + "(plantid varchar,"
-                + "formtype varchar,"
+                + "form varchar,"
                 + "FOREIGN KEY(plantid) REFERENCES plants(plantid))";
 
         // done
         String rootPattern = "Create table rootPattern"
                 + "(plantid varchar,"
-                + "pattern varchar,"
+                + "rootPattern varchar,"
                 + "FOREIGN KEY(plantid) REFERENCES plants(plantid))";
 
         // done
         String growthRate = "Create table growthRate"
                 + "(plantid varchar,"
-                + "rate varchar,"
+                + "growthRate varchar,"
                 + "FOREIGN KEY(plantid) REFERENCES plants(plantid))";
 
         // done
         String nativeRegion = "Create table nativeRegion"
                 + "(plantid varchar,"
-                + "region varchar,"
+                + "nativeRegion varchar,"
                 + "FOREIGN KEY(plantid) REFERENCES plants(plantid))";
 
         Statement SQLquery = SQL.createStatement();
@@ -694,9 +694,9 @@ public class PermaDBpopulate extends generalUtils {
         SQLquery.execute(plants);
         System.out.println("Table created: plants");
         SQLquery.execute(plantZones);
-        System.out.println("Table created: plantzones");
+        System.out.println("Table created: zone");
         SQLquery.execute(plantNames);
-        System.out.println("Table created: plantNames");
+        System.out.println("Table created: plantName");
         SQLquery.execute(light);
         System.out.println("Table created: light");
         SQLquery.execute(moisture);
