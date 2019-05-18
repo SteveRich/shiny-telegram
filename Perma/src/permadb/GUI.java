@@ -81,11 +81,7 @@ public class GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        resultList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        resultList.setToolTipText("");
         jScrollPane1.setViewportView(resultList);
 
         zoneList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -122,58 +118,58 @@ public class GUI extends javax.swing.JFrame {
         jLabel4.setText("N2 Fixer");
 
         n2Group.add(n2YesBTN);
-        n2YesBTN.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                n2YesBTNStateChanged(evt);
+        n2YesBTN.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                n2YesBTNItemStateChanged(evt);
             }
         });
 
         n2Group.add(n2NoBTN);
-        n2NoBTN.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                n2NoBTNStateChanged(evt);
+        n2NoBTN.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                n2NoBTNItemStateChanged(evt);
             }
         });
 
         mineralGroup.add(mineralYesBTN);
-        mineralYesBTN.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                mineralYesBTNStateChanged(evt);
+        mineralYesBTN.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                mineralYesBTNItemStateChanged(evt);
             }
         });
 
         mineralGroup.add(mineralNoBTN);
-        mineralNoBTN.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                mineralNoBTNStateChanged(evt);
+        mineralNoBTN.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                mineralNoBTNItemStateChanged(evt);
             }
         });
 
         invertGroup.add(invertYesBTN);
-        invertYesBTN.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                invertYesBTNStateChanged(evt);
+        invertYesBTN.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                invertYesBTNItemStateChanged(evt);
             }
         });
 
         invertGroup.add(invertNoBTN);
-        invertNoBTN.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                invertNoBTNStateChanged(evt);
+        invertNoBTN.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                invertNoBTNItemStateChanged(evt);
             }
         });
 
         groundCoverGroup.add(groundCoverYesBTN);
-        groundCoverYesBTN.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                groundCoverYesBTNStateChanged(evt);
+        groundCoverYesBTN.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                groundCoverYesBTNItemStateChanged(evt);
             }
         });
 
         groundCoverGroup.add(groundCoverNoBTN);
-        groundCoverNoBTN.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                groundCoverNoBTNStateChanged(evt);
+        groundCoverNoBTN.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                groundCoverNoBTNItemStateChanged(evt);
             }
         });
 
@@ -184,16 +180,16 @@ public class GUI extends javax.swing.JFrame {
         jLabel10.setText("Ground Cover");
 
         poisonGroup.add(poisonYesBTN);
-        poisonYesBTN.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                poisonYesBTNStateChanged(evt);
+        poisonYesBTN.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                poisonYesBTNItemStateChanged(evt);
             }
         });
 
         poisonGroup.add(poisonNoBTN);
-        poisonNoBTN.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                poisonNoBTNStateChanged(evt);
+        poisonNoBTN.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                poisonNoBTNItemStateChanged(evt);
             }
         });
 
@@ -398,45 +394,45 @@ public class GUI extends javax.swing.JFrame {
         updateResults();
     }//GEN-LAST:event_zoneListValueChanged
 
-    private void n2YesBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_n2YesBTNStateChanged
+    private void n2YesBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_n2YesBTNItemStateChanged
         updateResults();
-    }//GEN-LAST:event_n2YesBTNStateChanged
+    }//GEN-LAST:event_n2YesBTNItemStateChanged
 
-    private void n2NoBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_n2NoBTNStateChanged
+    private void n2NoBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_n2NoBTNItemStateChanged
         updateResults();
-    }//GEN-LAST:event_n2NoBTNStateChanged
+    }//GEN-LAST:event_n2NoBTNItemStateChanged
 
-    private void mineralYesBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_mineralYesBTNStateChanged
+    private void mineralYesBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_mineralYesBTNItemStateChanged
         updateResults();
-    }//GEN-LAST:event_mineralYesBTNStateChanged
+    }//GEN-LAST:event_mineralYesBTNItemStateChanged
 
-    private void mineralNoBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_mineralNoBTNStateChanged
+    private void mineralNoBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_mineralNoBTNItemStateChanged
         updateResults();
-    }//GEN-LAST:event_mineralNoBTNStateChanged
+    }//GEN-LAST:event_mineralNoBTNItemStateChanged
 
-    private void invertYesBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_invertYesBTNStateChanged
+    private void invertYesBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_invertYesBTNItemStateChanged
         updateResults();
-    }//GEN-LAST:event_invertYesBTNStateChanged
+    }//GEN-LAST:event_invertYesBTNItemStateChanged
 
-    private void invertNoBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_invertNoBTNStateChanged
+    private void invertNoBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_invertNoBTNItemStateChanged
         updateResults();
-    }//GEN-LAST:event_invertNoBTNStateChanged
+    }//GEN-LAST:event_invertNoBTNItemStateChanged
 
-    private void groundCoverYesBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_groundCoverYesBTNStateChanged
+    private void groundCoverYesBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_groundCoverYesBTNItemStateChanged
         updateResults();
-    }//GEN-LAST:event_groundCoverYesBTNStateChanged
+    }//GEN-LAST:event_groundCoverYesBTNItemStateChanged
 
-    private void groundCoverNoBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_groundCoverNoBTNStateChanged
+    private void groundCoverNoBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_groundCoverNoBTNItemStateChanged
         updateResults();
-    }//GEN-LAST:event_groundCoverNoBTNStateChanged
+    }//GEN-LAST:event_groundCoverNoBTNItemStateChanged
 
-    private void poisonYesBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_poisonYesBTNStateChanged
+    private void poisonYesBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_poisonYesBTNItemStateChanged
         updateResults();
-    }//GEN-LAST:event_poisonYesBTNStateChanged
+    }//GEN-LAST:event_poisonYesBTNItemStateChanged
 
-    private void poisonNoBTNStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_poisonNoBTNStateChanged
+    private void poisonNoBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_poisonNoBTNItemStateChanged
         updateResults();
-    }//GEN-LAST:event_poisonNoBTNStateChanged
+    }//GEN-LAST:event_poisonNoBTNItemStateChanged
 
     void initLists() {
         zoneList.setListData(new String[]{"2", "3", "4", "5", "6", "7", "8"});
@@ -558,10 +554,8 @@ public class GUI extends javax.swing.JFrame {
     // Dynamically retrieves list contents, works when the list query match the db values
     String[] getListParams(javax.swing.JList<String> inputList, String table) {
         int listSize = inputList.getModel().getSize();
-        System.out.println("List size: " + listSize);
         String[] listContents = new String[listSize];
         for (int i = 0; i < listSize; i++) {
-            System.out.println(inputList.getModel().getElementAt(i));
             listContents[i] = (inputList.getModel().getElementAt(i));
         }
 
