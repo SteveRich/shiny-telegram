@@ -156,6 +156,7 @@ public class Core {
         return output;
     }
 
+    // Returns array of simple query with single column result
     String[] getResultArr(String query, String column) {
         ArrayList<String> outputArr = new ArrayList<>();
         try {
