@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package permadb;
 
 import java.sql.PreparedStatement;
@@ -13,8 +8,17 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Firma
+ * @author Steve Rich
+ *
+ * Expected Structures of list/checkbox
+ *
+ * Lists: 0: light, 1: zone, 2: moisture, 3: habitat, 4: results
+ *
+ * Checkbox[y,n]: n2 fixer[0,1], mineral[2,3], invert shelter[4,5]
+ * groundCover[6,7], poison: [8,9]
  */
+
+
 public class Core {
 
     private boolean first = true;
@@ -26,6 +30,7 @@ public class Core {
 
     //  Returns distinct values for list. Works when column name is the table name
     String[] getListValues(String table) throws SQLException {
+
         ArrayList<String> outputArr = new ArrayList<>();
         String query = "select distinct " + table + " from " + table + " order by " + table + " asc";
         PreparedStatement SQLquery = SQL.prepareStatement(query);
@@ -53,10 +58,10 @@ public class Core {
     }
 
     // Main event updater, calls and executes new query on each button/checkbox event
-    void updateResults(ArrayList<javax.swing.JList> lists,ArrayList<javax.swing.JCheckBox> boxList) {
+    void updateResults(ArrayList<javax.swing.JList> lists, ArrayList<javax.swing.JCheckBox> boxList) {
         try {
             ArrayList<String> output = new ArrayList<>();
-            String query = getParams(lists,boxList);
+            String query = getParams(lists, boxList);
             PreparedStatement SQLquery = SQL.prepareStatement(query);
             ResultSet results = SQLquery.executeQuery();
             while (results.next()) {
@@ -86,7 +91,7 @@ public class Core {
         queryArr = appendParamsArr(queryArr, getListParams(lists.get(3), "habitat"), "habitat");
 
         query.append(getCheckBoxParams(boxList));
-        //System.out.println(queryArr[0].toString() + " " + queryArr[1].toString());
+        //System.out.println(queryArr[0].toString() + " " + queryArr[1].toString());  // Prints full select string
         return queryArr[0].toString() + " " + queryArr[1].toString();
     }
 
@@ -116,14 +121,6 @@ public class Core {
 
     // Handles all of the checkboxes for plant tables, only conditionals so returns String
     String getCheckBoxParams(ArrayList<javax.swing.JCheckBox> boxList) {
-        /* Expected Structure: 
-            n2 fixer: 0,1
-            mineral accum: 2,3
-            invert shelter: 4,5
-            groundCover: 6,7
-            poison: 8,9
-         */
-
         StringBuilder output = new StringBuilder();
 
         if (boxList.get(0).isSelected()) {
