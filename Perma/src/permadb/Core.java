@@ -17,8 +17,6 @@ import java.util.ArrayList;
  * Checkbox[y,n]: n2 fixer[0,1], mineral[2,3], invert shelter[4,5]
  * groundCover[6,7], poison: [8,9]
  */
-
-
 public class Core {
 
     private boolean first = true;
@@ -30,31 +28,8 @@ public class Core {
 
     //  Returns distinct values for list. Works when column name is the table name
     String[] getListValues(String table) throws SQLException {
-
-        ArrayList<String> outputArr = new ArrayList<>();
         String query = "select distinct " + table + " from " + table + " order by " + table + " asc";
-        PreparedStatement SQLquery = SQL.prepareStatement(query);
-        ResultSet results = SQLquery.executeQuery();
-        while (results.next()) {
-            outputArr.add(results.getString(table));
-        }
-        String[] output = new String[outputArr.size()];
-        output = outputArr.toArray(output);
-        return output;
-    }
-
-    // Overloaded select distinct, allows different column name
-    String[] getListValues(String table, String column) throws SQLException {
-        ArrayList<String> outputArr = new ArrayList<>();
-        String query = "select distinct " + column + " from " + table + " order by " + column + " asc";
-        PreparedStatement SQLquery = SQL.prepareStatement(query);
-        ResultSet results = SQLquery.executeQuery();
-        while (results.next()) {
-            outputArr.add(results.getString(column));
-        }
-        String[] output = new String[outputArr.size()];
-        output = outputArr.toArray(output);
-        return output;
+        return getResultArr(query, table);
     }
 
     // Main event updater, calls and executes new query on each button/checkbox event
@@ -68,8 +43,7 @@ public class Core {
                 output.add(results.getString("genus") + " " + results.getString("species"));
             }
             String[] listData = new String[]{};
-            listData = output.toArray(listData);
-            lists.get(4).setListData(listData);
+            lists.get(4).setListData(output.toArray(listData));
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -180,5 +154,20 @@ public class Core {
             output[i] = "." + table + "= '" + listContents[listIndex[i]] + "'";
         }
         return output;
+    }
+
+    String[] getResultArr(String query, String column) {
+        ArrayList<String> outputArr = new ArrayList<>();
+        try {
+            PreparedStatement SQLquery = SQL.prepareStatement(query);
+            ResultSet results = SQLquery.executeQuery();
+            while (results.next()) {
+                outputArr.add(results.getString(column));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        String[] output = new String[outputArr.size()];
+        return outputArr.toArray(output);
     }
 }
