@@ -14,18 +14,19 @@ public class GUI extends javax.swing.JFrame {
     Connection SQL;
 
     boolean first = true; // ugh, figure a way aroud this global
-    
+
     /*
      * Creates new form GUI
      */
     public GUI() {
         initComponents();
-        initLists();
         try {
             SQL = openConnection();
         } catch (SQLException e) {
             System.out.println(e);
         }
+
+        initLists();
     }
 
     /**
@@ -438,11 +439,45 @@ public class GUI extends javax.swing.JFrame {
         updateResults();
     }//GEN-LAST:event_poisonNoBTNItemStateChanged
 
+    // Sets default values for all list boxes
     void initLists() {
-        zoneList.setListData(new String[]{"2", "3", "4", "5", "6", "7", "8"});
-        lightList.setListData(new String[]{"Full Sun", "Partial Shade", "Shade"});
-        moistureList.setListData(new String[]{"Xeric", "Mesic", "Hydric"});
-        habitatList.setListData(new String[]{"Prairies", "Gaps/Clearings", "Open Woods", "Forest", "Disturbed", "Meadows", "Old Fields", "Edges", "Conifer Forest", "Thickets"});
+        try {
+            zoneList.setListData(getListValues("zone"));
+            lightList.setListData(getListValues("light"));
+            moistureList.setListData(getListValues("moisture"));
+            habitatList.setListData(getListValues("habitat"));
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    //  Returns distinct values for list. Works when column name is the table name
+    String[] getListValues(String table) throws SQLException {
+        ArrayList<String> outputArr = new ArrayList<>();
+        String query = "select distinct " + table + " from " + table + " order by " + table + " asc";
+        System.out.println(query);
+        PreparedStatement SQLquery = SQL.prepareStatement(query);
+        ResultSet results = SQLquery.executeQuery();
+        while (results.next()) {
+            outputArr.add(results.getString(table));
+        }
+        String[] output = new String[outputArr.size()];
+        output = outputArr.toArray(output);
+        return output;
+    }
+
+    // Overloaded select distinct, allows different column name
+    String[] getListValues(String table, String column) throws SQLException {
+        ArrayList<String> outputArr = new ArrayList<>();
+        String query = "select distinct " + column + " from " + table + " order by " + column + " asc";
+        PreparedStatement SQLquery = SQL.prepareStatement(query);
+        ResultSet results = SQLquery.executeQuery();
+        while (results.next()) {
+            outputArr.add(results.getString(column));
+        }
+        String[] output = new String[outputArr.size()];
+        output = outputArr.toArray(output);
+        return output;
     }
 
     // Main event updater, calls and executes new query on each button/checkbox event
@@ -461,6 +496,27 @@ public class GUI extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    // Polls each list and all check boxes to build the search query
+    String getParams() {
+        first = true; // reset global, determines where/or in query
+        String nameType = "genus, species ";
+        StringBuilder query = new StringBuilder("Select " + nameType + " from plants ");
+
+        StringBuilder[] queryArr = new StringBuilder[2];
+        queryArr[0] = query;
+        queryArr[1] = new StringBuilder();
+
+        queryArr = appendParamsArr(queryArr, getListParams(lightList, "light"), "light");
+        queryArr = appendParamsArr(queryArr, getListParams(zoneList, "zone"), "zone");
+        queryArr = appendParamsArr(queryArr, getListParams(moistureList, "moisture"), "moisture");
+        queryArr = appendParamsArr(queryArr, getListParams(habitatList, "habitat"), "habitat");
+
+        query.append(getCheckBoxParams());
+
+        System.out.println(queryArr[0].toString() + " " + queryArr[1].toString());
+        return queryArr[0].toString() + " " + queryArr[1].toString();
     }
 
     // Handles each value, assigns "Where" if it's the first in the list, else "And"
@@ -485,27 +541,6 @@ public class GUI extends javax.swing.JFrame {
             counter++;
         }
         return input;
-    }
-
-    // Polls each list and all check boxes to build the search query
-    String getParams() {
-        first = true; // reset global, determines where/or in query
-        String nameType = "genus, species ";
-        StringBuilder query = new StringBuilder("Select " + nameType + " from plants ");
-
-        StringBuilder[] queryArr = new StringBuilder[2];
-        queryArr[0] = query;
-        queryArr[1] = new StringBuilder();
-
-        queryArr = appendParamsArr(queryArr, getListParams(lightList, "light"), "light");
-        queryArr = appendParamsArr(queryArr, getListParams(zoneList, "zone"), "zone");
-        queryArr = appendParamsArr(queryArr, getListParams(moistureList, "moisture"), "moisture");
-        queryArr = appendParamsArr(queryArr, getListParams(habitatList, "habitat"), "habitat");
-
-        query.append(getCheckBoxParams());
-
-        System.out.println(queryArr[0].toString() + " " + queryArr[1].toString());
-        return queryArr[0].toString() + " " + queryArr[1].toString();
     }
 
     // Handles all of the checkboxes for plant tables, only conditionals so returns String
@@ -555,7 +590,7 @@ public class GUI extends javax.swing.JFrame {
         return output;
     }
 
-    // Dynamically retrieves list contents, works when the list query match the db values
+    // Retrieves list selections, assists in select query build
     String[] getListParams(javax.swing.JList<String> inputList, String table) {
         int listSize = inputList.getModel().getSize();
         String[] listContents = new String[listSize];
