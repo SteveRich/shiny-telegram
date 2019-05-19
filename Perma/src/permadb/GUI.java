@@ -12,19 +12,19 @@ import java.util.ArrayList;
 public class GUI extends javax.swing.JFrame {
 
     Connection SQL;
-
-    boolean first = true; // ugh, figure a way aroud this global
+    Core permaCore;
+    ArrayList<javax.swing.JList> lists;
+    ArrayList<javax.swing.JCheckBox> boxList;
 
     /*
      * Creates new form GUI
      */
     public GUI() {
         initComponents();
-        try {
-            SQL = openConnection();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
+
+        lists = getListBoxes();
+        boxList = getCheckBoxes();
+        permaCore = new Core(SQL = openConnection());
 
         initLists();
     }
@@ -384,226 +384,98 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void habitatListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_habitatListValueChanged
-        updateResults();
+        permaCore.updateResults(lists, boxList);
     }//GEN-LAST:event_habitatListValueChanged
 
     private void moistureListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_moistureListValueChanged
-        updateResults();
+        permaCore.updateResults(lists, boxList);
     }//GEN-LAST:event_moistureListValueChanged
 
     private void lightListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lightListValueChanged
-        updateResults();
+        permaCore.updateResults(lists, boxList);
     }//GEN-LAST:event_lightListValueChanged
 
     private void zoneListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_zoneListValueChanged
-        updateResults();
+        permaCore.updateResults(lists, boxList);
     }//GEN-LAST:event_zoneListValueChanged
 
     private void n2YesBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_n2YesBTNItemStateChanged
-        updateResults();
+        permaCore.updateResults(lists, boxList);
     }//GEN-LAST:event_n2YesBTNItemStateChanged
 
     private void n2NoBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_n2NoBTNItemStateChanged
-        updateResults();
+        permaCore.updateResults(lists, boxList);
     }//GEN-LAST:event_n2NoBTNItemStateChanged
 
     private void mineralYesBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_mineralYesBTNItemStateChanged
-        updateResults();
+        permaCore.updateResults(lists, boxList);
     }//GEN-LAST:event_mineralYesBTNItemStateChanged
 
     private void mineralNoBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_mineralNoBTNItemStateChanged
-        updateResults();
+        permaCore.updateResults(lists, boxList);
     }//GEN-LAST:event_mineralNoBTNItemStateChanged
 
     private void invertYesBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_invertYesBTNItemStateChanged
-        updateResults();
+        permaCore.updateResults(lists, boxList);
     }//GEN-LAST:event_invertYesBTNItemStateChanged
 
     private void invertNoBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_invertNoBTNItemStateChanged
-        updateResults();
+        permaCore.updateResults(lists, boxList);
     }//GEN-LAST:event_invertNoBTNItemStateChanged
 
     private void groundCoverYesBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_groundCoverYesBTNItemStateChanged
-        updateResults();
+        permaCore.updateResults(lists, boxList);
     }//GEN-LAST:event_groundCoverYesBTNItemStateChanged
 
     private void groundCoverNoBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_groundCoverNoBTNItemStateChanged
-        updateResults();
+        permaCore.updateResults(lists, boxList);
     }//GEN-LAST:event_groundCoverNoBTNItemStateChanged
 
     private void poisonYesBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_poisonYesBTNItemStateChanged
-        updateResults();
+        permaCore.updateResults(lists, boxList);
     }//GEN-LAST:event_poisonYesBTNItemStateChanged
 
     private void poisonNoBTNItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_poisonNoBTNItemStateChanged
-        updateResults();
+        permaCore.updateResults(lists, boxList);
     }//GEN-LAST:event_poisonNoBTNItemStateChanged
 
     // Sets default values for all list boxes
     void initLists() {
         try {
-            zoneList.setListData(getListValues("zone"));
-            lightList.setListData(getListValues("light"));
-            moistureList.setListData(getListValues("moisture"));
-            habitatList.setListData(getListValues("habitat"));
+            zoneList.setListData(permaCore.getListValues("zone"));
+            lightList.setListData(permaCore.getListValues("light"));
+            moistureList.setListData(permaCore.getListValues("moisture"));
+            habitatList.setListData(permaCore.getListValues("habitat"));
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
 
-    //  Returns distinct values for list. Works when column name is the table name
-    String[] getListValues(String table) throws SQLException {
-        ArrayList<String> outputArr = new ArrayList<>();
-        String query = "select distinct " + table + " from " + table + " order by " + table + " asc";
-        System.out.println(query);
-        PreparedStatement SQLquery = SQL.prepareStatement(query);
-        ResultSet results = SQLquery.executeQuery();
-        while (results.next()) {
-            outputArr.add(results.getString(table));
-        }
-        String[] output = new String[outputArr.size()];
-        output = outputArr.toArray(output);
+    // Returns list of all listboxes to pass to core
+    ArrayList<javax.swing.JList> getListBoxes() {
+        ArrayList<javax.swing.JList> output = new ArrayList<javax.swing.JList>();
+        output.add(lightList);
+        output.add(zoneList);
+        output.add(moistureList);
+        output.add(habitatList);
+        output.add(resultList);
         return output;
     }
 
-    // Overloaded select distinct, allows different column name
-    String[] getListValues(String table, String column) throws SQLException {
-        ArrayList<String> outputArr = new ArrayList<>();
-        String query = "select distinct " + column + " from " + table + " order by " + column + " asc";
-        PreparedStatement SQLquery = SQL.prepareStatement(query);
-        ResultSet results = SQLquery.executeQuery();
-        while (results.next()) {
-            outputArr.add(results.getString(column));
-        }
-        String[] output = new String[outputArr.size()];
-        output = outputArr.toArray(output);
-        return output;
-    }
-
-    // Main event updater, calls and executes new query on each button/checkbox event
-    void updateResults() {
-        try {
-            List<String> output = new ArrayList<>();
-            String query = getParams();
-            PreparedStatement SQLquery = SQL.prepareStatement(query);
-            ResultSet results = SQLquery.executeQuery();
-            while (results.next()) {
-                output.add(results.getString("genus") + " " + results.getString("species"));
-            }
-            String[] listData = new String[]{};
-            listData = output.toArray(listData);
-            resultList.setListData(listData);
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
-
-    // Polls each list and all check boxes to build the search query
-    String getParams() {
-        first = true; // reset global, determines where/or in query
-        String nameType = "genus, species ";
-        StringBuilder query = new StringBuilder("Select " + nameType + " from plants ");
-
-        StringBuilder[] queryArr = new StringBuilder[2];
-        queryArr[0] = query;
-        queryArr[1] = new StringBuilder();
-
-        queryArr = appendParamsArr(queryArr, getListParams(lightList, "light"), "light");
-        queryArr = appendParamsArr(queryArr, getListParams(zoneList, "zone"), "zone");
-        queryArr = appendParamsArr(queryArr, getListParams(moistureList, "moisture"), "moisture");
-        queryArr = appendParamsArr(queryArr, getListParams(habitatList, "habitat"), "habitat");
-
-        query.append(getCheckBoxParams());
-
-        System.out.println(queryArr[0].toString() + " " + queryArr[1].toString());
-        return queryArr[0].toString() + " " + queryArr[1].toString();
-    }
-
-    // Handles each value, assigns "Where" if it's the first in the list, else "And"
-    StringBuilder appendParams(StringBuilder input, String[] inputArray) {
-        for (String value : inputArray) {
-            input.append(getConditional()).append(value);
-        }
-        return input;
-    }
-
-    // Struct: input[0] contains all tables and joins, input[1] contains all conditionals
-    StringBuilder[] appendParamsArr(StringBuilder input[], String[] inputArray, String table) {
-        int counter = 0;
-        for (String join : inputArray) {
-            input[0].append(" INNER JOIN " + table + " " + table + counter + " on plants.plantid = " + table + counter + ".plantid");
-            if (first) {
-                input[1].append(" WHERE " + table + counter).append(join);
-                first = false;
-            } else {
-                input[1].append(" AND " + table + counter).append(join);
-            }
-            counter++;
-        }
-        return input;
-    }
-
-    // Handles all of the checkboxes for plant tables, only conditionals so returns String
-    String getCheckBoxParams() {
-        StringBuilder output = new StringBuilder();
-
-        if (n2YesBTN.isSelected()) {
-            output.append(getConditional()).append("plants.n2Fixer = 1 ");
-        } else if (n2NoBTN.isSelected()) {
-            output.append(getConditional()).append("plants.n2Fixer = 0 ");
-        }
-
-        if (mineralYesBTN.isSelected()) {
-            output.append(getConditional()).append("plants.mineralAccum = 1 ");
-        } else if (mineralNoBTN.isSelected()) {
-            output.append(getConditional()).append("plants.mineralAccum = 0 ");
-        }
-
-        if (invertYesBTN.isSelected()) {
-            output.append(getConditional()).append("plants.invertShelter = 1 ");
-        } else if (invertNoBTN.isSelected()) {
-            output.append(getConditional()).append("plants.invertShelter = 0 ");
-        }
-
-        if (groundCoverYesBTN.isSelected()) {
-            output.append(getConditional()).append("plants.groundCover = 1 ");
-        } else if (groundCoverNoBTN.isSelected()) {
-            output.append(getConditional()).append("plants.groundCover = 0 ");
-        }
-
-        if (poisonYesBTN.isSelected()) {
-            output.append(getConditional()).append("plants.poison = 1 ");
-        } else if (poisonNoBTN.isSelected()) {
-            output.append(getConditional()).append("plants.poison = 0 ");
-        }
-
-        return output.toString();
-    }
-
-    // Returns and/where depending on status of global boolean 'first'
-    String getConditional() {
-        String output = " AND ";
-        if (first) {
-            output = " WHERE ";
-            first = false;
-        }
-        return output;
-    }
-
-    // Retrieves list selections, assists in select query build
-    String[] getListParams(javax.swing.JList<String> inputList, String table) {
-        int listSize = inputList.getModel().getSize();
-        String[] listContents = new String[listSize];
-        for (int i = 0; i < listSize; i++) {
-            listContents[i] = (inputList.getModel().getElementAt(i));
-        }
-
-        int[] listIndex = inputList.getSelectedIndices();
-        String[] output = new String[listIndex.length];
-        for (int i = 0; i < listIndex.length; i++) {
-            output[i] = "." + table + "= '" + listContents[listIndex[i]] + "'";
-        }
-        return output;
+    //  Returns list of all checkboxes to pass to core
+    ArrayList<javax.swing.JCheckBox> getCheckBoxes() {
+        ArrayList<javax.swing.JCheckBox> boxList = new ArrayList<javax.swing.JCheckBox>();
+        boxList.add(n2YesBTN);
+        boxList.add(n2NoBTN);
+        boxList.add(mineralYesBTN);
+        boxList.add(mineralNoBTN);
+        boxList.add(invertYesBTN);
+        boxList.add(invertNoBTN);
+        boxList.add(groundCoverYesBTN);
+        boxList.add(groundCoverNoBTN);
+        boxList.add(poisonYesBTN);
+        boxList.add(poisonNoBTN);
+        return boxList;
     }
 
     /**
@@ -642,14 +514,22 @@ public class GUI extends javax.swing.JFrame {
     }
 
     Connection openConnection(String database) throws SQLException {
+
         String url = "jdbc:sqlite:" + database;
         return DriverManager.getConnection(url);
+
     }
 
-    Connection openConnection() throws SQLException {
-        // String url = "jdbc:sqlite:" + database;
-        String url = "jdbc:sqlite::resource:permaDB.db";
-        return DriverManager.getConnection(url);
+    // Returns embedded DB, handles catch internally
+    Connection openConnection() {
+        Connection SQL = null;
+        try {
+            String url = "jdbc:sqlite::resource:permaDB.db";
+            SQL = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return SQL;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
